@@ -8,13 +8,12 @@ __email__ = "jeffrey.hager.dev@gmail.com"
 __version__ = "1.0.0"
 
 
-import tkinter as tk
-import sys, os
+import sys, os, inspect
 import inputoverride as inputOR
 import outputoverride as outputOR
 import pprint as pPrint
-import inspect
-
+import simpleui_test as tester
+import tkinter as tk
         
 class wrapCLI(tk.Tk):
   """
@@ -64,7 +63,7 @@ class wrapCLI(tk.Tk):
     argSpecs = inspect.getargspec(self.userMethod)
     return { 
       'Mehtod_Name': self.userMethod.__name__,
-      'Method_Doc': '<Todo>',
+      'Method_Doc': self.userMethod.__doc__,
       'Method_ArgumentsAndDefaults': dict(zip(argSpecs.args, argSpecs.defaults)),
     }
 
@@ -73,4 +72,7 @@ class wrapCLI(tk.Tk):
     print('Wrapping CLI for '+self.userMethod.__name__+'\n')
     self.userMethod()
     print('\n\n'+ self.userMethod.__name__+' has finished running...\n')
-  
+
+
+if __name__ == '__main__':
+  tester.input_test()

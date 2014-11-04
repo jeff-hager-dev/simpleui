@@ -3,6 +3,7 @@ import sys
 
 def input_test():
   def testMethod(test=None, test2=3, test4={}):
+    """Test doc string in the input test method"""
     inputVar = input("Entery Your name: ")
     print(inputVar)
 
@@ -11,6 +12,7 @@ def input_test():
 
 def output_test():
   def testMethod(test=None, test2=3, test4={}):
+    """Test doc string in the input test method"""
     print('This is a standard out put (print)')
     sys.stdout.write('This is also a standard output (sys.stdout)')
     sys.stderr.write('This is a standard error output (sys.stderr)')
@@ -18,6 +20,3 @@ def output_test():
   testApp = sui.wrapCLI(testMethod)
   testApp.mainloop()
   #end output_test():
-
-if __name__ == '__main__':
-  input_test()
