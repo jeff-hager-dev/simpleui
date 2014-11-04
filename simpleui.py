@@ -12,6 +12,7 @@ import tkinter as tk
 import sys, os
 import inputoverride as inputOR
 import outputoverride as outputOR
+import pprint as pPrint
 
         
 class wrapCLI(tk.Tk):
@@ -58,10 +59,10 @@ class wrapCLI(tk.Tk):
     self.destroy()
 
   def methodDetails(self):
-    return "TODO Implement"
+    return { 'Mehtod_Name': self.userMethod.__name__ }
 
   def ExecuteUserMethod(self):
-    print(self.methodDetails())
+    pPrint.pprint(self.methodDetails(), indent=2)
     print('Wrapping CLI for '+self.userMethod.__name__+'\n')
     self.userMethod()
     print('\n\n'+ self.userMethod.__name__+' has finished running...\n')
