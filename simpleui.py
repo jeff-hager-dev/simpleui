@@ -13,6 +13,7 @@ import sys, os
 import inputoverride as inputOR
 import outputoverride as outputOR
 import pprint as pPrint
+import inspect
 
         
 class wrapCLI(tk.Tk):
@@ -24,6 +25,7 @@ class wrapCLI(tk.Tk):
   def __init__(self, userMethod):
     super(wrapCLI, self).__init__()
     self.userMethod = userMethod
+    self.title('CLI Wrapper: '+self.userMethod.__name__)
     self.configToolBar()
     self.configTxtArea()
     self.redirectInput()
@@ -59,7 +61,12 @@ class wrapCLI(tk.Tk):
     self.destroy()
 
   def methodDetails(self):
-    return { 'Mehtod_Name': self.userMethod.__name__ }
+    argSpecs = inspect.getargspec(self.userMethod)
+    return { 
+      'Mehtod_Name': self.userMethod.__name__,
+      'Method_Doc': '<Todo>',
+      'Method_ArgumentsAndDefaults': dict(zip(argSpecs.args, argSpecs.defaults)),
+    }
 
   def ExecuteUserMethod(self):
     pPrint.pprint(self.methodDetails(), indent=2)
