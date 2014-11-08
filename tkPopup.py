@@ -16,9 +16,20 @@ class tkPopUpEntry(object):
   """
     A basic popup window that a user can enter in a value.
   """
-  def __init__(self, master):
-    super(tkPopUpEntry, self).__init__()
-    self.master = master
+  __masterTK = None
+  __top = None
+
+  def __init__(self, masterTK):
+    self.__masterTK = masterTK
+    self.configureUI()
     
-  def configureUI(self):
-    pass
+  def configureUI(self):    
+    self.__top=tk.Toplevel(self.__masterTK)
+    self.e=tk.Entry(self.__top)
+    self.e.pack()
+    self.b=tk.Button(self.__top,text='Ok',command=self.cleanup)
+    self.b.pack()
+
+  def cleanup(self):
+    self.value=self.e.get()
+    self.__top.destroy()
